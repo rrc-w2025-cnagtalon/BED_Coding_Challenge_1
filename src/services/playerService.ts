@@ -18,3 +18,13 @@ const players: Player[] = [
     { id: 3, name: "ProGamer", wins: 99, losses: 0, totalScore: 0 }
 ];
 
+
+//returns player count
+const playerCount = () => ({
+    count: players.length,
+    players: players
+});
+
+//returns single player by ID
+
+//returns calculated performance rating
