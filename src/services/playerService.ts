@@ -19,12 +19,18 @@ const players: Player[] = [
 ];
 
 
-//returns player count
-const playerCount = () => ({
-    count: players.length,
-    players: players
-});
+/**
+ * Gets a list of all the players, as well a total count.
+ * @returns {Object} An object that contains the total count, and an array of all players.
+ */
+export const getPlayerCount = () => {
+    return {
+        count: players.length,
+        players: players
+    };
+};
 
 //returns single player by ID
+
 
 //returns calculated performance rating

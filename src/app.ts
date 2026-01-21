@@ -1,11 +1,17 @@
 import express, { Express } from "express";
+import { getPlayerCount } from "./services/playerService";
 
 // Initialize Express application
 const app: Express = express();
 
-// Define a route
-app.get("/", (req, res) => {
-    res.send("Hello, World!");
+/**
+ * Gets all players with a total count
+ * @returns {JSON} An object containing the player count and array of total players.
+ */
+app.get("/api/v1/players", (req, res) => {
+    const data = getPlayerCount();
+
+    res.json(data)
 });
 
 export default app;
