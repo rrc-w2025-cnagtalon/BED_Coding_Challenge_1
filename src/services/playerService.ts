@@ -15,7 +15,7 @@ interface Player {
 const players: Player[] = [
     { id: 1, name: "ShadowStrike", wins: 15, losses: 5, totalScore: 28500 },
     { id: 2, name: "NoobMaster", wins: 3, losses: 12, totalScore: 4200 },
-    { id: 3, name: "ProGamer", wins: 99, losses: 0, totalScore: 0 }
+    { id: 3, name: "ProGamer", wins: 0, losses: 0, totalScore: 0 }
 ];
 
 /**
@@ -38,4 +38,19 @@ export const getPlayerWithId = (id: number): Player | undefined => {
     return players.find((player) => player.id === id);
 };
 
-//returns calculated performance rating
+/**
+ * Calculates a player's rating based on their stats.
+ * @param player Player object
+ * @returns {number} The rating rounded to 2 decimal places. 
+ */
+export const calculatePlayerRating = (player: Player): number => {
+    const totalGames = player.wins + player.losses
+    //if player hasn't played any games, rating is 0. 
+    if (totalGames === 0) {
+        return 0;
+    }
+
+    const rating = (player.wins / totalGames) * 100 + (player.totalScore / totalGames);
+
+    return Math.round(rating * 100) / 100;
+};

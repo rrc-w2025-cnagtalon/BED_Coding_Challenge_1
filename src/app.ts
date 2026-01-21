@@ -1,5 +1,5 @@
 import express, { Express } from "express";
-import { getPlayerCount, getPlayerWithId } from "./services/playerService";
+import { getPlayerCount, getPlayerWithId, calculatePlayerRating } from "./services/playerService";
 
 
 // Initialize Express application
@@ -28,7 +28,31 @@ app.get("/api/v1/players/:id", (req, res) => {
     if (player) {
         res.json(player);
     } else {
+        res.status(404).json({
+            message: `Cannot find player ${playerID}`
+        });
+    }
+});
 
+/**
+ * Gets the player's rating and stat summary.
+ * @returns 200 - returns the player's stats and rating.
+ * @returns 404 - Returns an error message if the player doesnt exist.
+ */
+app.get("/api/v1/players/:id/rating", (req, res) => {
+    const playerID = parseInt(req.params.id);
+    const player = getPlayerWithId(playerID);
+
+    if (player) {
+        const rating = calculatePlayerRating(player);
+
+        res.json({
+            playerId: player.id,
+            playerName: player.name,
+            playerRating: rating,
+            totalGamesPlayed: player.wins + player.losses
+        });
+    } else {
         res.status(404).json({
             message: `Cannot find player ${playerID}`
         });
