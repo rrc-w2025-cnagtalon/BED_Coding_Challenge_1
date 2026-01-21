@@ -18,7 +18,6 @@ const players: Player[] = [
     { id: 3, name: "ProGamer", wins: 99, losses: 0, totalScore: 0 }
 ];
 
-
 /**
  * Gets a list of all the players, as well a total count.
  * @returns {Object} An object that contains the total count, and an array of all players.
@@ -30,7 +29,13 @@ export const getPlayerCount = () => {
     };
 };
 
-//returns single player by ID
-
+/**
+ * Finds a player by their ID.
+ * @param id - The numeric ID of the player to search for.
+ * @returns The specific player object, or undefined if not found.
+ */
+export const getPlayerWithId = (id: number): Player | undefined => {
+    return players.find((player) => player.id === id);
+};
 
 //returns calculated performance rating
